@@ -5,8 +5,8 @@ import styled from "styled-components"; // Importando styled-components
 
 // Estilizando o Container principal
 const Container = styled.div`
-  font-family: Arial, sans-serif;
-  background-color: #0066b2;
+  font-family: Arial, sans-serif; // Mantendo a fonte Arial
+  background-color: #00549b; // Mudando para a nova cor de fundo
   color: #ffffff;
   min-height: 100vh;
   padding: 20px;
@@ -17,7 +17,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #00549b;
+  background-color: #00549b; // Mantendo a cor de fundo do Header
   padding: 15px;
   border-radius: 8px;
 `;
@@ -55,7 +55,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Title>Tecnospeed</Title>
         <Menu>
           <button>Plug Boleto</button>
-          <button>Filtros</button>
+          <button>Filtro</button>
         </Menu>
       </Header>
       <Component {...pageProps} />
