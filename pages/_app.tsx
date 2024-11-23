@@ -1,13 +1,9 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import "@/styles/globals.css"; // Importando estilos globais
+import type { AppProps } from "next/app"; // Importando tipos do Next.js
+import React from "react"; // Importando React
+import styled from "styled-components"; // Importando styled-components
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
-}
-
-import React from "react";
-import styled from "styled-components";
-
+// Estilizando o Container principal
 const Container = styled.div`
   font-family: Arial, sans-serif;
   background-color: #0066b2;
@@ -16,6 +12,7 @@ const Container = styled.div`
   padding: 20px;
 `;
 
+// Estilizando o Header
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -25,38 +22,43 @@ const Header = styled.div`
   border-radius: 8px;
 `;
 
+// Estilizando o título
 const Title = styled.h1`
   font-size: 24px;
 `;
 
+// Estilizando o Menu
 const Menu = styled.div`
   display: flex;
   gap: 15px;
 
   button {
     background: none;
-    color: white;
-    border: 1px solid white;
-    border-radius: 8px;
-    padding: 8px 16px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
+    color: #ffffff; // Adicionando cor ao texto do botão
+    transition: background-color 0.3s; // Transição suave para o fundo
 
     &:hover {
-      background-color: #ffffff;
-      color: #00549b;
+      background-color: rgba(255, 255, 255, 0.2); // Efeito de hover
     }
   }
 `;
 
-const ChartContainer = styled.div`
-  margin-top: 30px;
-  background-color: #001d5b;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-`;
-
-const ChartTitle = styled.h2`
-  font-size: 20px;
-  margin-bottom: 10px; /* Adicione o valor que deseja */
-`;
+// Componente App
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <Container>
+      <Header>
+        <Title>Tecnospeed</Title>
+        <Menu>
+          <button>Plug Boleto</button>
+          <button>Filtros</button>
+        </Menu>
+      </Header>
+      <Component {...pageProps} />
+    </Container>
+  );
+}
