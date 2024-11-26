@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; // Correct way to import if you need useEffect and useState
+import styled, { createGlobalStyle } from "styled-components"; // Ensure this is only included once
 import { Line } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -141,15 +143,15 @@ const BankMonitoring: React.FC = () => {
           <button style={buttonStyle} onClick={filterByPagamento}>
             Pagamentos
           </button>
-          <button style={buttonStyle} onClick={() => setIsCobrançaFilter(false) || setIsPagamentoFilter(false)}>
-            Todos
+          <button style={buttonStyle} onClick={() => { setIsCobrançaFilter(false); setIsPagamentoFilter(false); }}>
+          Todos
           </button>
           <div>
             <button style={{ ...buttonStyle, display: "flex", alignItems: "center" }} onClick={toggleDropdown}>
               Selecionar Banco ▼
             </button>
             {dropdownVisible && (
-              <div style={dropdownStyle}>
+              <div style={dropdownStyle}> 
                 {banks.map((bank) => (
                   <div
                     key={bank.code}
@@ -235,8 +237,11 @@ const BankMonitoring: React.FC = () => {
         </tbody>
       </table>
     </div>
+    
   );
 };
+
+
 
 const buttonStyle = {
   backgroundColor: "#007bff",
@@ -266,4 +271,165 @@ const dropdownItemStyle = {
   borderBottom: "1px solid #444",
 };
 
-export default BankMonitoring;
+
+const AdvertisementContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 90px; /* Dobrei a altura com padding maior */
+  background: linear-gradient(135deg, #0078d7, #00aaff);
+  color: #fff;
+  border-radius: 16px;
+  margin-top: 100px; /* Trouxe o quadrado mais para baixo */
+`;
+
+
+const TextSection = styled.div`
+  flex: 2;
+`;
+
+const AdvertisementTitle = styled.h2`
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+`;
+
+const AdvertisementText = styled.p`
+  margin-bottom: 20px;
+  line-height: 1.5;
+  font-size: 1.2rem;
+`;
+
+const HighlightBox = styled.div`
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  margin-top: 20px;
+  border-left: 5px solid #00d1ff;
+  border-radius: 8px;
+
+  strong {
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+    
+     p2 {
+    font-size: 2.0rem;
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #f0f0f0;
+  }
+    
+`;
+
+const IconSteps = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+`;
+
+const Step = styled.div`
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  color: #fff;
+
+  img {
+    width: 50px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 10px
+  }
+    
+  p2 {
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+    
+`;
+
+const ImageSection = styled.div`
+  flex: 1;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+`;
+
+const PlugboletoAdvertisement: React.FC = () => {
+  return (
+    <AdvertisementContainer>
+      {/* Text Section */}
+      <TextSection>
+        <AdvertisementTitle>
+        Seu cliente esqueceu de importar a remessa? Evite trabalhar com arquivos manuais
+        </AdvertisementTitle>
+        <AdvertisementText>
+        Com o PlugBoleto TecnoSpeed, seu software poderá registrar os boletos de forma automatizada e direto com os bancos, sem intervenção manual.
+        </AdvertisementText>
+
+        <HighlightBox>
+          <strong>Como funciona o Plug Boleto?</strong>
+          <p>
+          O Plug Boleto é um middleware que conecta seu sistema diretamente às APIs bancárias, automatizando o envio e a consulta de boletos com segurança. Confira o processo abaixo:
+          </p>
+        </HighlightBox>
+
+        <IconSteps>
+          <Step>
+            <p2>Integração via API</p2>
+            <p>Nossa API recebe o JSON do seu sistema.</p>
+            <img src="https://cdn-icons-png.flaticon.com/128/439/439163.png"/>
+          </Step>
+          <Step>
+            <p2>Processamento ao Banco</p2>
+            <p>Enviamos o boleto para o banco e o mesmo devolve para nossa API.</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/603/603189.png"/>
+          </Step>
+          <Step>
+            <p2>Entrega ao Pagador</p2>
+            <p>O boleto é entregue ao devido pagador.</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/6491/6491623.png"/>
+          </Step>
+        </IconSteps>
+      </TextSection>
+
+      {/* Image Section */}
+      <ImageSection>
+  <img
+    src="https://gaea.com.br/wp-content/uploads/2021/08/post_thumbnail-02e628f918fe64275a32f84d1e5ae030.jpeg"
+    alt="Dashboard Mobile"
+    width="400"
+    height="480"
+  />
+</ImageSection>
+    </AdvertisementContainer>
+  );
+};
+
+
+
+const MonitoringWithAdvertisement: React.FC = () => {
+  return (
+    <>
+      <BankMonitoring />
+      <PlugboletoAdvertisement />
+    </>
+  );
+};
+
+export default MonitoringWithAdvertisement
